@@ -1,0 +1,55 @@
+use rand::Rng;
+let mut contador_j1 = 0;
+let mut contador_j2 = 0;
+for j in 1..10{
+
+    for k in 1..2{
+
+        let mut rng = rand::thread_rng();
+                
+        let num: u8 = rng.gen_range(0..10);
+
+        println!("Jugador 1, puntaje de ronda {} tiro {}: {}", j, k, num);
+
+        if k == 1 && num == 10{
+            println!("Jugador 1, ha realizado una chuza en  la ronda {}.", j);
+            let mut contador_j1 = contador_j1 + 10;
+        }
+        if k == 2 && num == 10{
+            println!("Jugador 1, ha realizado una media chuza en la ronda {}.", j);
+            let mut contador_j1 = contador_j1 + 10;
+        }else{
+            let mut contador_j1 = contador_j2 + num
+        }
+        println!("Puntaje total de juego jugador 1{}", num);
+        }
+
+    for l in 1..2{
+        let mut rng = rand::thread_rng();
+        let num: u8 = rng.gen_range(0..10);
+
+        println!("Jugador 2, puntaje de ronda {} tiro {}: {}", j, l, num);
+
+        if k == 1 && num == 10{
+            println!("Jugador 2, ha realizado una chuza en  la ronda {}.", j);
+            let mut contador_j2 = contador_j2 + 10;
+        }
+        if k == 2 && num == 10{
+            println!("Jugador 2, ha realizado una media chuza en la ronda {}.", j);
+            let mut contador_j2 = contador_j2 + 10;
+        }else{
+            let mut contador_j2 = contador_j2 + num
+        }
+        println!("Puntaje total de juego jugador 2{}", num);
+    }
+}
+
+if contador_j2 < contador_j1{
+    println!("Gana jugador 1.")
+}
+if contador_j2 > contador_j1{
+    println!("Gana jugador 2.")
+}
+if contador_j1 = contador_j2{
+    println!("Es un empate.")
+}
