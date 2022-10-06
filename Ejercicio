@@ -1,55 +1,99 @@
 use rand::Rng;
-let mut contador_j1 = 0;
-let mut contador_j2 = 0;
-for j in 1..10{
+use std::io::stdin;
 
-    for k in 1..2{
+fn main(){
+    let mut puntajesj1: [u8; 10] = [0; 10];
 
-        let mut rng = rand::thread_rng();
+    let mut puntajesj2: [u8; 10] = [0; 10];
+
+    let mut _contadorj1 = 0;
+
+    let mut _contadorj2 = 0;
+
+    println!("Bienvenid@s. Para iniciar cada ronda deben presionar 'ENTER'.");
+
+
+    for j in 1..11{
+        let mut z = String::new();
+        stdin().read_line(&mut z).unwrap();
+        
+        let c = j - 1;
+
+        for k in 1..2{
+    
+            let mut rng = rand::thread_rng();
+                    
+            let num1: u8 = rng.gen_range(0..11);
+    
+            if k == 1 && num1 == 10{
+                let suma1 = 10;
+                puntajesj1[c] = suma1;
+                println!("Jugador 1, ha realizado una chuza en  la ronda {}. Su tabla de puntajes es: {:?}.\n", j, puntajesj1);
+                break;
+
+            }else if k == 1 {
+                println!("Jugador 1, en su primer tiro de la ronda {}. obtuvo {} puntos.", j, num1);
+                let a = 11 - num1;
+                let num2: u8 = rng.gen_range(0..a);
+                let suma2 = num1 + num2;
+
+                if suma2 == 10{
+                    println!("Jugador 1, en su segundo tiro de la ronda {}, ha obtenido {} puntos. Por lo tanto, ¡ha realizado media chuza!", j, num2);
                 
-        let num: u8 = rng.gen_range(0..10);
-
-        println!("Jugador 1, puntaje de ronda {} tiro {}: {}", j, k, num);
-
-        if k == 1 && num == 10{
-            println!("Jugador 1, ha realizado una chuza en  la ronda {}.", j);
-            let mut contador_j1 = contador_j1 + 10;
+                }else{
+                    println!("Jugador 1, en su segundo tiro de la ronda {}, obtuvo {} puntos.", j, num2);
+                }
+                
+                puntajesj1[c] = suma2;
+                println!("Jugador 1 su tabla de puntajes es: {:?}.\n", puntajesj1);
+                break;
+            }
         }
-        if k == 2 && num == 10{
-            println!("Jugador 1, ha realizado una media chuza en la ronda {}.", j);
-            let mut contador_j1 = contador_j1 + 10;
-        }else{
-            let mut contador_j1 = contador_j2 + num
+    
+        for l in 1..2{
+            let mut rng = rand::thread_rng();
+            let num3: u8 = rng.gen_range(0..11);
+    
+            if l == 1 && num3 == 10{
+                let suma3 = 10;
+                puntajesj2[c] = suma3;
+                println!("Jugador 2, ha realizado una chuza en  la ronda {}. Su tabla de puntajes es: {:?}.\n", j, puntajesj2);
+                break;
+            
+            }else if l == 1{
+                println!("Jugador 2, en su primer tiro de la ronda {}. obtuvo {} puntos.", j, num3);
+                let b = 11 - num3;
+                let num4: u8 = rng.gen_range(0..b);
+                let suma4 = num3 + num4;
+                
+                if suma4 == 10{
+                    println!("Jugador 2, en su segundo tiro de la ronda {}, ha obtenido {} puntos. Por lo tanto, ¡ha realizado media chuza!", j, num4);
+                
+                }else{
+                    println!("Jugador 2, en su segundo tiro de la ronda {}, obtuvo {} puntos.", j, num4);
+                }
+                puntajesj2[c] = suma4;
+                println!("Jugador 2 su tabla de puntajes es: {:?}.\n", puntajesj2);
+                break;
+            }
         }
-        println!("Puntaje total de juego jugador 1{}", num);
-        }
-
-    for l in 1..2{
-        let mut rng = rand::thread_rng();
-        let num: u8 = rng.gen_range(0..10);
-
-        println!("Jugador 2, puntaje de ronda {} tiro {}: {}", j, l, num);
-
-        if k == 1 && num == 10{
-            println!("Jugador 2, ha realizado una chuza en  la ronda {}.", j);
-            let mut contador_j2 = contador_j2 + 10;
-        }
-        if k == 2 && num == 10{
-            println!("Jugador 2, ha realizado una media chuza en la ronda {}.", j);
-            let mut contador_j2 = contador_j2 + 10;
-        }else{
-            let mut contador_j2 = contador_j2 + num
-        }
-        println!("Puntaje total de juego jugador 2{}", num);
+            
     }
-}
+    for _x in puntajesj1{
+        _contadorj1 = _contadorj1 + _x; 
+    }
+    println!("Jugador 1, su puntaje total es: {}.", _contadorj1);
+    for _y in puntajesj2{
+        _contadorj2 += _y;
+    }
+    println!("Jugador 2, su puntaje total es: {}. \n", _contadorj2);
 
-if contador_j2 < contador_j1{
-    println!("Gana jugador 1.")
-}
-if contador_j2 > contador_j1{
-    println!("Gana jugador 2.")
-}
-if contador_j1 = contador_j2{
-    println!("Es un empate.")
+    if _contadorj1 > _contadorj2{
+        println!("Gana jugador 1. ¡Felicitaciones!");
+    } else if _contadorj1 < _contadorj2{
+        println!("Gana jugador 2. ¡Felicitaciones!");
+    } else if _contadorj1 == _contadorj2{
+        println!("¡Es un empate!");
+    }
+    
 }
